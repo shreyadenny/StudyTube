@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ChannelDetailActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/channel_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_150sdp"
+            android:layout_margin="@dimen/_10sdp"
+            android:src="@drawable/code" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:textColor="#3C8F7D"
+            android:textSize="@dimen/_15sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Channel Name" />
+
+        <TextView
+            android:id="@+id/channel_name"
+            style="@style/text_white_bold_18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Code For a Cause" />
+        <TextView
+            android:id="@+id/views"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:textColor="#3C8F7D"
+            android:textSize="@dimen/_15sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Views" />
+
+        <TextView
+            android:id="@+id/viewCount"
+            style="@style/text_white_bold_18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="791403" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:textColor="#3C8F7D"
+            android:textSize="@dimen/_15sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description" />
+
+        <TextView
+            android:id="@+id/channel_description"
+            style="@style/text_white_bold_18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Code for Cause is an initiative started by a group of like-minded people working for a similar cause. Our primary focus is to provide guidance and mentorship to students. Not only for those who lack on-campus opportunities but also for those who lack awareness about the possibilities in the field. We provide a hands-on learning experience and keep students informed about the latest trends in technology, opportunities so that they can keep up with the fast-paced digital world via following a pi-shape learning pattern " />
+
+    </LinearLayout>
+
+</ScrollView>

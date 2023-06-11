@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".HomeActivity">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_gravity="center"
+        android:id="@+id/home_name"
+        style="@style/text_white_bold_18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp">
+
+        <TextView
+            android:id="@+id/channel_viewall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:text="View All"
+            android:textColor="#3C8F7D"
+            android:textSize="@dimen/_10sdp" />
+    <TextView
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_gravity="left"
+        android:id="@+id/channels"
+        android:text="Channels"
+        android:textStyle="bold"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:textColor="#3C8F7D"
+        android:textSize="@dimen/_15sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/home_category"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp">
+    <TextView
+        android:id="@+id/subjects_view_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:textColor="#3C8F7D"
+        android:textSize="@dimen/_10sdp"
+        android:text="View All" />
+    <TextView
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_centerVertical="true"
+        android:layout_gravity="left"
+        android:id="@+id/subjects"
+        android:text="Subjects"
+        android:textStyle="bold"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:textColor="#3C8F7D"
+        android:textSize="@dimen/_15sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/subjects_category"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp">
+    <TextView
+        android:id="@+id/evaluation_viewall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:textColor="#3C8F7D"
+        android:textSize="@dimen/_10sdp"
+        android:text="View All" />
+    <TextView
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_centerVertical="true"
+        android:layout_gravity="left"
+        android:id="@+id/eval"
+        android:text="Evaluation"
+        android:textStyle="bold"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:textColor="#3C8F7D"
+        android:textSize="@dimen/_15sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/eval_category"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/home_profile"
+        style="@style/button_green_bold_16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="@string/profile" />
+    <Button
+        android:id="@+id/home_logout"
+        style="@style/button_green_bold_16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="@string/logout" />
+
+</LinearLayout>
+</ScrollView>

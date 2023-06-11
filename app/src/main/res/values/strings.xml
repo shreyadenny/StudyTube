@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">May Internship 23</string>
+    <string name="welcome">StudyTube</string>
+    <string name="welcome_message">Please Log into your existing account</string>
+    <string name="your_email">Your Email</string>
+    <string name="your_password">Your Password</string>
+    <string name="login">Log in</string>
+    <string name="create_account">New Account?</string>
+    <string name="name">Name</string>
+    <string name="contact_number">Contact Number</string>
+    <string name="password">Password</string>
+    <string name="logout">Logout</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="date_of_birth">Date Of Birth</string>
+
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="profile">Profile</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="submit">Submit</string>
+    <string name="signup">Signup</string>
+    <string name="title_activity_bottom_nav_demo">BottomNavDemoActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+</resources>

@@ -1,0 +1,131 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".SignupActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_150sdp"
+            android:src="@drawable/image" />
+
+
+        <EditText
+            android:id="@+id/signup_name"
+            style="@style/edit_white_trans_14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/name"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+        />
+
+        <EditText
+            android:id="@+id/signup_email"
+            style="@style/edit_white_trans_14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:hint="@string/your_email"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/signup_contact"
+            style="@style/edit_white_trans_14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:hint="@string/contact_number"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:inputType="phone"
+            android:maxLength="10" />
+
+        <EditText
+            android:id="@+id/signup_password"
+            style="@style/edit_white_trans_14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:maxLength="15" />
+
+        <EditText
+            android:id="@+id/signup_confirm_password"
+            style="@style/edit_white_trans_14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:hint="@string/confirm_password"
+            android:inputType="textPassword"
+            android:maxLength="15" />
+
+        <EditText
+            android:editable="false"
+            android:id="@+id/signup_date_of_birth"
+            style="@style/edit_white_trans_14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:drawableLeft="@drawable/calender_month"
+            android:drawablePadding="@dimen/_5sdp"
+            android:hint="@string/date_of_birth" />
+
+        <RadioGroup
+            android:id="@+id/signup_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/signup_male"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/male"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                 />
+
+            <RadioButton
+                android:id="@+id/signup_female"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/female"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                 />
+
+        </RadioGroup>
+
+        <Spinner
+            android:background="@color/white_transparent_70"
+            android:id="@+id/signup_spinner"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+           android:id="@+id/signup_button"
+            android:text="@string/signup"
+            style="@style/button_green_bold_16"
+            android:layout_marginVertical="@dimen/_20sdp"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</ScrollView>
