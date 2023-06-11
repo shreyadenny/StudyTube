@@ -32,22 +32,22 @@ public class DashboardActivity extends AppCompatActivity {
         bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
             @Override
             public void onClickItem(MeowBottomNavigation.Model item) {
-                /*if (item.getId() == HOME_BOTTOM) {
+                if (item.getId() == HOME_BOTTOM) {
                     FragmentManager manager = getSupportFragmentManager();
                     //manager.beginTransaction().replace(R.id.home_main, new HomeFragment()).commit();
                 }
                 if (item.getId() == CART_BOTTOM) {
                     FragmentManager manager = getSupportFragmentManager();
-                    //manager.beginTransaction().replace(R.id.home_main, new CategoryFragment()).commit();
+                    manager.beginTransaction().replace(R.id.home_main, new CartFragment()).commit();
                 }
                 if (item.getId() == WISHLIST_BOTTOM) {
                     FragmentManager manager = getSupportFragmentManager();
-                    //manager.beginTransaction().replace(R.id.home_main, new CategoryFragment()).commit();
+                    manager.beginTransaction().replace(R.id.home_main, new WishlistFragment()).commit();
                 }
                 if (item.getId() == PROFILE_BOTTOM) {
                     FragmentManager manager = getSupportFragmentManager();
-                    //manager.beginTransaction().replace(R.id.home_main, new ProfileFragment()).commit();
-                }*/
+                    manager.beginTransaction().replace(R.id.home_main, new ProfileFragment()).commit();
+                }
                 Toast.makeText(DashboardActivity.this, "clicked item : " + item.getId(), Toast.LENGTH_SHORT).show();
             }
         });
