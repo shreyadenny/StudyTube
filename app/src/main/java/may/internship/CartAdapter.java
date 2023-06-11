@@ -69,7 +69,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyHolder> {
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                channelArrayList.remove(position);
                 new CommonMethod(context,"Remove from Cart");
+                notifyDataSetChanged();
             }
         });
 
