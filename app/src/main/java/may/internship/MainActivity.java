@@ -1,6 +1,5 @@
 package may.internship;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,11 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -97,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                                 sp.edit().putString(ConstantData.CITY,sCity).commit();
 //                                cursor.moveToNext();
 
-                                new CommonMethod(MainActivity.this,HomeActivity.class);
+                                new CommonMethod(MainActivity.this, HomeFragment.class);
 
                                 /*Intent intent = new Intent(MainActivity.this,HomeActivity.class);
                                 Bundle bundle = new Bundle();

@@ -56,7 +56,7 @@
             android:name=".SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".HomeFragment"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

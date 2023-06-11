@@ -34,7 +34,7 @@ public class DashboardActivity extends AppCompatActivity {
             public void onClickItem(MeowBottomNavigation.Model item) {
                 if (item.getId() == HOME_BOTTOM) {
                     FragmentManager manager = getSupportFragmentManager();
-                    //manager.beginTransaction().replace(R.id.home_main, new HomeFragment()).commit();
+                    manager.beginTransaction().replace(R.id.home_main, new HomeFragment()).commit();
                 }
                 if (item.getId() == CART_BOTTOM) {
                     FragmentManager manager = getSupportFragmentManager();
@@ -68,7 +68,12 @@ public class DashboardActivity extends AppCompatActivity {
 
         bottomNavigation.show(HOME_BOTTOM, true);
         FragmentManager manager = getSupportFragmentManager();
-        //manager.beginTransaction().replace(R.id.home_main, new CategoryFragment()).commit();
+        manager.beginTransaction().replace(R.id.home_main, new HomeFragment()).commit();
 
+    }
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        finishAffinity();
     }
 }

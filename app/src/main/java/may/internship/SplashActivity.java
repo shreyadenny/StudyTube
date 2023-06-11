@@ -34,7 +34,7 @@ public class SplashActivity extends AppCompatActivity {
                     finish();
                 }
                 else{
-                    new CommonMethod(SplashActivity.this, HomeActivity.class);
+                    new CommonMethod(SplashActivity.this, DashboardActivity.class);
                     finish();
                 }
             }

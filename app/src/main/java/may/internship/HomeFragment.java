@@ -1,22 +1,25 @@
 package may.internship;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeFragment extends Fragment {
     TextView name, channelsViewAll, subjectsViewAll, evaluationViewAll;
     SharedPreferences sp;
-    Button logout, profile;
     ArrayList<ChannelList> channelListArrayList;
     ArrayList<SubjectList> subjectListArrayList;
     ArrayList<SubjectList> evalList;
@@ -58,45 +61,33 @@ public class HomeActivity extends AppCompatActivity {
             "Evaluation of clarity of concepts through live presentation in class. Students are expected to explain concepts in class"};
 
 
+    public HomeFragment() {
+        // Required empty public constructor
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        sp = getSharedPreferences(ConstantData.PREF,MODE_PRIVATE);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.frag_home, container, false);
+        sp = getActivity().getSharedPreferences(ConstantData.PREF,MODE_PRIVATE);
 
-        profile = findViewById(R.id.home_profile);
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new CommonMethod(HomeActivity.this, ProfileActivity.class);
-            }
-        });
-        logout = findViewById(R.id.home_logout);
-
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //sp.edit().remove(ConstantData.CONTACT).commit();
-                sp.edit().clear().commit();
-                new CommonMethod(HomeActivity.this,MainActivity.class);
-            }
-        });
-        name = findViewById(R.id.home_name);
+        name = view.findViewById(R.id.home_name);
 
 //        Bundle bundle = getIntent().getExtras();
 //        name.setText("Welcome "+bundle.getString("NAME"));
         name.setText("Welcome "+sp.getString(ConstantData.NAME,""));
 
         //channels
-        channelsViewAll = findViewById(R.id.channel_viewall);
+        channelsViewAll = view.findViewById(R.id.channel_viewall);
         channelsViewAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new CommonMethod(HomeActivity.this,ChannelsActivity.class);
+                new CommonMethod(getActivity(),ChannelsActivity.class);
             }
         });
 
-        categoryRecyclerview = findViewById(R.id.home_category);
+        categoryRecyclerview = view.findViewById(R.id.home_category);
         categoryRecyclerview.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.HORIZONTAL));
         categoryRecyclerview.setItemAnimator(new DefaultItemAnimator());
 
@@ -111,18 +102,18 @@ public class HomeActivity extends AppCompatActivity {
         }
 //        CategoryAdapter catAdapter = new CategoryAdapter(HomeActivity.this,categoryNameArray,categoryImageArray);
 //        categoryRecyclerview.setAdapter(catAdapter);
-        CategoryAdapter catAdapter = new CategoryAdapter(HomeActivity.this,channelListArrayList);
+        CategoryAdapter catAdapter = new CategoryAdapter(getActivity(),channelListArrayList);
         categoryRecyclerview.setAdapter(catAdapter);
 
        //subjects
-        subjectsViewAll = findViewById(R.id.subjects_view_all);
+        subjectsViewAll = view.findViewById(R.id.subjects_view_all);
         subjectsViewAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new CommonMethod(HomeActivity.this,ActivitySubjects.class);
+                new CommonMethod(getActivity(),ActivitySubjects.class);
             }
         });
-        categoryRecyclerview = findViewById(R.id.subjects_category);
+        categoryRecyclerview = view.findViewById(R.id.subjects_category);
         categoryRecyclerview.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.HORIZONTAL));
         categoryRecyclerview.setItemAnimator(new DefaultItemAnimator());
         subjectListArrayList = new ArrayList<>();
@@ -133,18 +124,18 @@ public class HomeActivity extends AppCompatActivity {
             list.setDescription(subjectsDescriptionArray[i]);
             subjectListArrayList.add(list);
         }
-        SubjectAdapter catAdapter2 = new SubjectAdapter(HomeActivity.this,subjectListArrayList);
+        SubjectAdapter catAdapter2 = new SubjectAdapter(getActivity(),subjectListArrayList);
         categoryRecyclerview.setAdapter(catAdapter2);
 
         //evaluation
-        evaluationViewAll = findViewById(R.id.evaluation_viewall);
+        evaluationViewAll = view.findViewById(R.id.evaluation_viewall);
         evaluationViewAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new CommonMethod(HomeActivity.this,EvalActivity.class);
+                new CommonMethod(getActivity(),EvalActivity.class);
             }
         });
-        categoryRecyclerview = findViewById(R.id.eval_category);
+        categoryRecyclerview = view.findViewById(R.id.eval_category);
         categoryRecyclerview.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.HORIZONTAL));
         categoryRecyclerview.setItemAnimator(new DefaultItemAnimator());
 
@@ -156,14 +147,8 @@ public class HomeActivity extends AppCompatActivity {
             list.setDescription(evalDescriptionArray[i]);
             evalList.add(list);
         }
-        SubjectAdapter catAdapter3 = new SubjectAdapter(HomeActivity.this,evalList);
+        SubjectAdapter catAdapter3 = new SubjectAdapter(getActivity(),evalList);
         categoryRecyclerview.setAdapter(catAdapter3);
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        //super.onBackPressed();
-        finishAffinity();
+        return view;
     }
 }
