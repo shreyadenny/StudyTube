@@ -24,7 +24,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         bottomNavigation = findViewById(R.id.home_bottom);
 
-        bottomNavigation.add(new MeowBottomNavigation.Model(HOME_BOTTOM, R.drawable.calender));
+        bottomNavigation.add(new MeowBottomNavigation.Model(HOME_BOTTOM, R.drawable.ic_home));
         bottomNavigation.add(new MeowBottomNavigation.Model(CART_BOTTOM, R.drawable.add));
         bottomNavigation.add(new MeowBottomNavigation.Model(WISHLIST_BOTTOM, R.drawable.wishlist_fill));
         bottomNavigation.add(new MeowBottomNavigation.Model(PROFILE_BOTTOM, R.drawable.user));
