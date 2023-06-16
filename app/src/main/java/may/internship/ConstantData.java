@@ -13,5 +13,6 @@ public class ConstantData {
     public static String CHANNEL_NAME = "channel_name";
     public static String CHANNEL_VIEWS = "channel_price";
     public static String CHANNEL_IMAGE = "channel_image";
+    public static String PRICE_SYMBOL = "₹";
     public static String CHANNEL_DESCRIPTION = "channel_description";
 }

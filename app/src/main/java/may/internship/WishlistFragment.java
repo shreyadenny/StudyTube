@@ -18,6 +18,7 @@ public class WishlistFragment extends Fragment {
     ArrayList<ChannelList> channelListArrayList;
     String[] channelNameArray = {"Industry","Electrical concepts","Civil engineering"};
     int[] categoryImageArray = {R.drawable.industry,R.drawable.electrical,R.drawable.civil};
+    String[] priceArray = {"200","100","150"};
     String[] views = { "3432", "1232", "34222"};
     String[] channelDescriptionArray = {"Myself Shridhar Rajendra Mankar a Engineer l YouTuber l Educational Blogger l Educator l Podcaster. \n" + "My Aim- To Make Engineering Students Life EASY.\n" + "\n" + "On 5 Minutes Engineering you can find EASIEST explanations for all below mentioned subjects in DESI HINDI", "Hi, I am Basumati Rawal. I am an electronics practical holder teacher. I am going to teach from basic to advanced level of practical electronics. Stay Tuned.", "TECHNOLOGY IN SHORT focused on helping people acquire the skills and technical knowledge they need to thrive in the digital world.\n" + "We  explain all latest trending technologies in short and simple language.",
             "Covering all sectors, The Manufacturer, is an essential resource for every boardroom, senior management, delivering thought leadership articles, regulatory updates and best practice case studies.\n" +                    "\n" + "With regular events hosted around the country The Manufacturer brings extensive industry knowledge to you in person as well as online. For more information about our events and webinars go to our website.",
@@ -51,6 +52,7 @@ public class WishlistFragment extends Fragment {
             list.setName(channelNameArray[i]);
             list.setImage(categoryImageArray[i]);
             list.setViews(views[i]);
+            list.setPrice(priceArray[i]);
             list.setDescription(channelDescriptionArray[i]);
             channelListArrayList.add(list);
         }

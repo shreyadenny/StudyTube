@@ -19,7 +19,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyHolder> {
 
     Context context;
-    String[] catNameArray;
+    String[] catNameArray, cartPriceArray;
     ArrayList<ChannelList> channelArrayList;
     int[] categoryImageArray;
     SharedPreferences sp;
@@ -39,11 +39,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyHolder> {
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
-        TextView name;
+        TextView name, price;
         ImageView imageView,remove, wishlist, wishlistFill;
         public MyHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.custom_cart_image);
+            price=itemView.findViewById(R.id.custom_cart_price);
             name = itemView.findViewById(R.id.custom_cart_name);
             remove = itemView.findViewById(R.id.custom_cart_remove);
             wishlist = itemView.findViewById(R.id.custom_cart_wishlist);
@@ -55,6 +56,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyHolder> {
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
         holder.imageView.setImageResource(channelArrayList.get(position).getImage());
         holder.name.setText(channelArrayList.get(position).getName());
+        holder.price.setText(ConstantData.PRICE_SYMBOL + " " + channelArrayList.get(position).getPrice());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +71,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyHolder> {
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                CartFragment.iTotalAmount=CartFragment.iTotalAmount - Integer.parseInt(channelArrayList.get(position).getPrice());
+                CartFragment.totalAmount.setText("Total : " +ConstantData.PRICE_SYMBOL+CartFragment.iTotalAmount);
+
+                if(CartFragment.iTotalAmount>0){
+                    CartFragment.totalAmount.setVisibility(View.VISIBLE);
+                    CartFragment.checkout.setVisibility(View.VISIBLE);
+                }
+                else{
+                    CartFragment.totalAmount.setVisibility(View.GONE);
+                    CartFragment.checkout.setVisibility(View.GONE);
+                }
                 channelArrayList.remove(position);
                 new CommonMethod(context,"Remove from Cart");
                 notifyDataSetChanged();

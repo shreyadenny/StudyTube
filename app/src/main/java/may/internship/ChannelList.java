@@ -2,7 +2,7 @@ package may.internship;
 
 public class ChannelList {
 
-    String name,views,description;
+    String name,views,description,price;
     int image;
 
     public String getName() {
@@ -13,6 +13,13 @@ public class ChannelList {
     }
     public String getViews() {
         return views;
+    }
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
     public void setViews(String views) {
         this.views = views;
