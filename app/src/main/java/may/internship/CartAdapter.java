@@ -1,7 +1,10 @@
 package may.internship;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,15 +23,25 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyHolder> {
 
     Context context;
     String[] catNameArray, cartPriceArray;
-    ArrayList<ChannelList> channelArrayList;
+    ArrayList<CartList> channelArrayList;
+    SQLiteDatabase db;
     int[] categoryImageArray;
     SharedPreferences sp;
 
 
-    public CartAdapter(Context context, ArrayList<ChannelList> channelArrayList) {
+    public CartAdapter(Context context, ArrayList<CartList> channelArrayList) {
         this.context = context;
         this.channelArrayList=channelArrayList;
         sp = context.getSharedPreferences(ConstantData.PREF,Context.MODE_PRIVATE);
+        db = context.openOrCreateDatabase("MayInternship",MODE_PRIVATE,null);
+        String tableQuery = "CREATE TABLE IF NOT EXISTS RECORD(NAME VARCHAR(100),EMAIL VARCHAR(100),CONTACT BIGINT(10),PASSWORD VARCHAR(15),DOB VARCHAR(10),GENDER VARCHAR(6),CITY VARCHAR(50))";
+        db.execSQL(tableQuery);
+
+        String wishlistTableQuery = "CREATE TABLE IF NOT EXISTS WISHLIST(CONTACT INT(10),PRODUCTNAME VARCHAR(100))";
+        db.execSQL(wishlistTableQuery);
+
+        String cartTableQuery = "CREATE TABLE IF NOT EXISTS CART(CONTACT VARCHAR(100),ORDERID INT(10),PRODUCTNAME VARCHAR(100),QTY INT(10),PRODUCTPRICE BIGINT(100),VIEWS BIGINT(100),PRODUCTIMAGE BIGINT(100))";
+        db.execSQL(cartTableQuery);
     }
 
     @NonNull
@@ -39,12 +52,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyHolder> {
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
-        TextView name, price;
-        ImageView imageView,remove, wishlist, wishlistFill;
+        TextView name, price,qty;
+        ImageView imageView,remove, wishlist, wishlistFill, add;
         public MyHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.custom_cart_image);
             price=itemView.findViewById(R.id.custom_cart_price);
+            qty = itemView.findViewById(R.id.custom_cart_qty);
+            add = itemView.findViewById(R.id.custom_product_cart);
             name = itemView.findViewById(R.id.custom_cart_name);
             remove = itemView.findViewById(R.id.custom_cart_remove);
             wishlist = itemView.findViewById(R.id.custom_cart_wishlist);
@@ -57,6 +72,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyHolder> {
         holder.imageView.setImageResource(channelArrayList.get(position).getImage());
         holder.name.setText(channelArrayList.get(position).getName());
         holder.price.setText(ConstantData.PRICE_SYMBOL + " " + channelArrayList.get(position).getPrice());
+        holder.qty.setText("Qty : "+channelArrayList.get(position).getQty());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +111,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyHolder> {
                 holder.wishlistFill.setVisibility(View.VISIBLE);
             }
         });
-
+        if(channelArrayList.get(position).isWishlist()){
+            holder.wishlist.setVisibility(View.GONE);
+            holder.wishlistFill.setVisibility(View.VISIBLE);
+        }
+        else{
+            holder.wishlist.setVisibility(View.VISIBLE);
+            holder.wishlistFill.setVisibility(View.GONE);
+        }
         holder.wishlistFill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,6 +126,22 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyHolder> {
                 holder.wishlistFill.setVisibility(View.GONE);
             }
         });
+        holder.add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new CommonMethod(context,"Add To Cart");
+                int iQty = 1;
+                int productPrice = Integer.parseInt(channelArrayList.get(position).getPrice());
+                int iTotalPrice = iQty * productPrice;
+                int views=Integer.parseInt(channelArrayList.get(position).getViews());
+                String cont =sp.getString(ConstantData.CONTACT,"");
+                String insertQuery = "INSERT INTO CART VALUES('"+cont+"','0','"+channelArrayList.get(position).getName()+"','"+iQty+"','"+iTotalPrice+"','"+views+"','"+channelArrayList.get(position).getImage()+"')";
+                db.execSQL(insertQuery);
+                holder.add.setVisibility(View.GONE);
+                holder.remove.setVisibility(View.VISIBLE);
+            }
+        });
+
     }
 
     @Override

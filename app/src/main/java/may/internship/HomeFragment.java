@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,13 +22,15 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
     TextView name, channelsViewAll, subjectsViewAll, evaluationViewAll;
     SharedPreferences sp;
-    ArrayList<ChannelList> channelListArrayList;
+    SQLiteDatabase db;
+    ArrayList<CartList> channelListArrayList;
     ArrayList<SubjectList> subjectListArrayList;
     ArrayList<SubjectList> evalList;
 
     RecyclerView categoryRecyclerview;
 
     String[] categoryNameArray = {"Code for a cause","Engineering in 5 min","Electronics at your tips","Industry","Electrical concepts","Civil engineering"};
+    String[] channelPriceArray = {"200","100","150", "430", "250", "100"};
     int[] categoryImageArray = {R.drawable.code,R.drawable.mechanical,R.drawable.electronics,R.drawable.industry,R.drawable.electrical,R.drawable.civil};
     String[] views = {"23433", "354657", "56767", "3432", "1232", "34222"};
     String[] channelDescriptionArray = {"Code for Cause is an initiative started by a group of like-minded people working for a similar cause. Our primary focus is to provide guidance and mentorship to students. Not only for those who lack on-campus opportunities but also for those who lack awareness about the possibilities in the field. We provide a hands-on learning experience and keep students informed about the latest trends in technology, opportunities so that they can keep up with the fast-paced digital world via following a pi-shape learning pattern ",
@@ -72,6 +76,16 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.frag_home, container, false);
         sp = getActivity().getSharedPreferences(ConstantData.PREF,MODE_PRIVATE);
 
+        db = getActivity().openOrCreateDatabase("MayInternship",MODE_PRIVATE,null);
+        String tableQuery = "CREATE TABLE IF NOT EXISTS RECORD(NAME VARCHAR(100),EMAIL VARCHAR(100),CONTACT BIGINT(10),PASSWORD VARCHAR(15),DOB VARCHAR(10),GENDER VARCHAR(6),CITY VARCHAR(50))";
+        db.execSQL(tableQuery);
+
+        String wishlistTableQuery = "CREATE TABLE IF NOT EXISTS WISHLIST(CONTACT INT(10),PRODUCTNAME VARCHAR(100))";
+        db.execSQL(wishlistTableQuery);
+
+        String cartTableQuery = "CREATE TABLE IF NOT EXISTS CART(CONTACT VARCHAR(100),ORDERID INT(10),PRODUCTNAME VARCHAR(100),QTY INT(10),PRODUCTPRICE BIGINT(100),VIEWS BIGINT(100),PRODUCTIMAGE BIGINT(100))";
+        db.execSQL(cartTableQuery);
+
         name = view.findViewById(R.id.home_name);
 
 //        Bundle bundle = getIntent().getExtras();
@@ -93,11 +107,29 @@ public class HomeFragment extends Fragment {
 
         channelListArrayList = new ArrayList<>();
         for(int i=0;i<categoryNameArray.length;i++){
-            ChannelList list = new ChannelList();
+            CartList list = new CartList();
             list.setName(categoryNameArray[i]);
             list.setImage(categoryImageArray[i]);
             list.setViews(views[i]);
+            list.setPrice(channelPriceArray[i]);
             list.setDescription(channelDescriptionArray[i]);
+            String wishlishCheckQuery = "SELECT * FROM WISHLIST WHERE CONTACT='"+sp.getString(ConstantData.CONTACT,"")+"' AND PRODUCTNAME='"+categoryNameArray[i]+"'";
+            Cursor cursor = db.rawQuery(wishlishCheckQuery,null);
+            if(cursor.getCount()>0){
+                list.setWishlist(true);
+            }
+            else{
+                list.setWishlist(false);
+            }
+
+            String cartCheckQuery = "SELECT * FROM CART WHERE CONTACT='"+sp.getString(ConstantData.CONTACT,"")+"' AND PRODUCTNAME='"+categoryNameArray[i]+"' AND ORDERID='0'";
+            Cursor cursorCart = db.rawQuery(cartCheckQuery,null);
+            if(cursorCart.getCount()>0){
+                list.setCart(true);
+            }
+            else{
+                list.setCart(false);
+            }
             channelListArrayList.add(list);
         }
 //        CategoryAdapter catAdapter = new CategoryAdapter(HomeActivity.this,categoryNameArray,categoryImageArray);
@@ -148,6 +180,7 @@ public class HomeFragment extends Fragment {
             evalList.add(list);
         }
         SubjectAdapter catAdapter3 = new SubjectAdapter(getActivity(),evalList);
+        categoryRecyclerview.setAdapter(catAdapter3);
         categoryRecyclerview.setAdapter(catAdapter3);
         return view;
     }

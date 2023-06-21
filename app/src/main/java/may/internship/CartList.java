@@ -1,10 +1,8 @@
 package may.internship;
 
-public class ChannelList {
-
-    String name,views,description,price;
+public class CartList {
+    String name,price,unit,description,qty,views;
     int image;
-
     boolean isWishlist = false;
     boolean isCart = false;
 
@@ -24,24 +22,27 @@ public class ChannelList {
         isWishlist = wishlist;
     }
 
+
     public String getName() {
         return name;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setViews(String views) {
+        this.views = views;
     }
     public String getViews() {
         return views;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getPrice() {
         return price;
     }
 
     public void setPrice(String price) {
         this.price = price;
-    }
-    public void setViews(String views) {
-        this.views = views;
     }
 
     public String getDescription() {
@@ -51,10 +52,20 @@ public class ChannelList {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getQty() {
+        return qty;
+    }
+
+    public void setQty(String qty) {
+        this.qty = qty;
+    }
+
     public int getImage() {
         return image;
     }
-    public void setImage(int image){
-        this.image=image;
+
+    public void setImage(int image) {
+        this.image = image;
     }
 }

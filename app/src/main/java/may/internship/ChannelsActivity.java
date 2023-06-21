@@ -5,6 +5,9 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import java.util.ArrayList;
@@ -13,6 +16,7 @@ public class ChannelsActivity extends AppCompatActivity {
     RecyclerView channelRecyclerview;
     String[] categoryNameArray = {"Code for a cause","Engineering in 5 min","Electronics at your tips","Industry","Electrical concepts","Civil engineering"};
     String[] views = {"23433", "354657", "56767", "3432", "1232", "34222"};
+    String[] channelPriceArray = {"200","100","150", "430", "250", "100"};
     int[] categoryImageArray = {R.drawable.code,R.drawable.mechanical,R.drawable.electronics,R.drawable.industry,R.drawable.electrical,R.drawable.civil};
     String[] channelDescriptionArray = {"Code for Cause is an initiative started by a group of like-minded people working for a similar cause. Our primary focus is to provide guidance and mentorship to students. Not only for those who lack on-campus opportunities but also for those who lack awareness about the possibilities in the field. We provide a hands-on learning experience and keep students informed about the latest trends in technology, opportunities so that they can keep up with the fast-paced digital world via following a pi-shape learning pattern ",
             "Myself Shridhar Rajendra Mankar a Engineer l YouTuber l Educational Blogger l Educator l Podcaster. \n" + "My Aim- To Make Engineering Students Life EASY.\n" + "\n" + "On 5 Minutes Engineering you can find EASIEST explanations for all below mentioned subjects in DESI HINDI", "Hi, I am Basumati Rawal. I am an electronics practical holder teacher. I am going to teach from basic to advanced level of practical electronics. Stay Tuned.", "TECHNOLOGY IN SHORT focused on helping people acquire the skills and technical knowledge they need to thrive in the digital world.\n" + "We  explain all latest trending technologies in short and simple language.",
@@ -28,22 +32,56 @@ public class ChannelsActivity extends AppCompatActivity {
                     "3. Also, I provide subject-wise Lectures.\n" +
                     " \n" +
                     "So, If you are a civil engineer then stay with us and support us so that we can do something better in our field."};
-    ArrayList<ChannelList> channelListArrayList;
+    ArrayList<CartList> channelListArrayList;
+    SharedPreferences sp;
+    SQLiteDatabase db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_channels);
+        sp = getSharedPreferences(ConstantData.PREF,MODE_PRIVATE);
+
+        db = openOrCreateDatabase("MayInternship",MODE_PRIVATE,null);
+        String tableQuery = "CREATE TABLE IF NOT EXISTS RECORD(NAME VARCHAR(100),EMAIL VARCHAR(100),CONTACT BIGINT(10),PASSWORD VARCHAR(15),DOB VARCHAR(10),GENDER VARCHAR(6),CITY VARCHAR(50))";
+        db.execSQL(tableQuery);
+
+        String wishlistTableQuery = "CREATE TABLE IF NOT EXISTS WISHLIST(CONTACT INT(10),PRODUCTNAME VARCHAR(100))";
+        db.execSQL(wishlistTableQuery);
+
+        String cartTableQuery = "CREATE TABLE IF NOT EXISTS CART(CONTACT VARCHAR(100),ORDERID INT(10),PRODUCTNAME VARCHAR(100),QTY INT(10),PRODUCTPRICE BIGINT(100),VIEWS BIGINT(100),PRODUCTIMAGE BIGINT(100))";
+        db.execSQL(cartTableQuery);
+
 
         channelRecyclerview = findViewById(R.id.channel_recyclerview);
         channelRecyclerview.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));
         channelRecyclerview.setItemAnimator(new DefaultItemAnimator());
         channelListArrayList = new ArrayList<>();
         for(int i=0;i<categoryNameArray.length;i++){
-            ChannelList list = new ChannelList();
+            CartList list = new CartList();
             list.setName(categoryNameArray[i]);
             list.setImage(categoryImageArray[i]);
             list.setViews(views[i]);
             list.setDescription(channelDescriptionArray[i]);
+
+            String wishlishCheckQuery = "SELECT * FROM WISHLIST WHERE CONTACT='"+sp.getString(ConstantData.CONTACT,"")+"' AND PRODUCTNAME='"+categoryNameArray[i]+"'";
+            Cursor cursor = db.rawQuery(wishlishCheckQuery,null);
+            if(cursor.getCount()>0){
+                list.setWishlist(true);
+            }
+            else{
+                list.setWishlist(false);
+            }
+
+            String cartCheckQuery = "SELECT * FROM CART WHERE CONTACT='"+sp.getString(ConstantData.CONTACT,"")+"' AND PRODUCTNAME='"+categoryNameArray[i]+"' AND ORDERID='0'";
+            Cursor cursorCart = db.rawQuery(cartCheckQuery,null);
+            if(cursorCart.getCount()>0){
+                list.setCart(true);
+            }
+            else{
+                list.setCart(false);
+            }
+
             channelListArrayList.add(list);
         }
         CategoryAdapter catAdapter = new CategoryAdapter(ChannelsActivity.this,channelListArrayList);
