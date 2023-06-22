@@ -62,6 +62,14 @@ public class OrderAdapter  extends RecyclerView.Adapter<OrderAdapter.MyHolder>{
         else{
             holder.paymentMethod.setText(productArrayList.get(position).getPaymentMethod());
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sp.edit().putString(ConstantData.ORDER_POSITION, String.valueOf(position)).commit();
+                new CommonMethod(context, OrderDetailsAcitivity.class);
+            }
+        });
     }
 
     @Override
