@@ -16,6 +16,7 @@
     <string name="cod">Cash On Delivery</string>
     <string name="online">Online</string>
     <string name="male">Male</string>
+    <string name="my_order">My Order</string>
     <string name="female">Female</string>
     <string name="profile">Profile</string>
     <string name="edit_profile">Edit Profile</string>

@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 public class ProfileFragment extends Fragment {
-    Button logout, profile;
+    Button logout, profile,myOrder;
     SharedPreferences sp;
 
     public ProfileFragment() {
@@ -25,6 +25,15 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
         sp=getActivity().getSharedPreferences(ConstantData.PREF, Context.MODE_PRIVATE);
+
+        myOrder = view.findViewById(R.id.fragment_profile_order_history);
+        myOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new CommonMethod(getActivity(),OrderHistoryActivity.class);
+            }
+        });
+
         profile = view.findViewById(R.id.fragment_profile_profile);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
