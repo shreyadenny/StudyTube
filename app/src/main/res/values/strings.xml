@@ -12,7 +12,9 @@
     <string name="logout">Logout</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="date_of_birth">Date Of Birth</string>
-
+    <string name="address">Address</string>
+    <string name="cod">Cash On Delivery</string>
+    <string name="online">Online</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="profile">Profile</string>

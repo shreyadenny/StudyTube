@@ -9,7 +9,7 @@ public class ConstantData {
     public static String GENDER = "gender";
     public static String CITY = "city";
     public static String DOB = "dob";
-
+    public static String CART_TOTAL = "cart_total";
     public static String CHANNEL_NAME = "channel_name";
     public static String CHANNEL_VIEWS = "channel_price";
     public static String CHANNEL_IMAGE = "channel_image";
